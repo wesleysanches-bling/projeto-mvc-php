@@ -41,7 +41,8 @@
 	<body>
 		<div class="ajaxload"></div>
 		<div class="loader-wrapper"></div>
+		{% include 'principal/tema/header.twig' %}
 		{% block body %}{% endblock %}
-		{% include './tema/footer.twig' %}
+		{% include 'principal/tema/footer.twig' %}
 	</body>
 </html>
