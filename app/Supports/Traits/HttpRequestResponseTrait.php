@@ -11,7 +11,7 @@ trait HttpRequestResponseTrait
     {
         $requestMethod = $_SERVER['REQUEST_METHOD'];
         if (!in_array($requestMethod, $expectedMethods)) {
-            return $this->jsonResponse('erro', [], "Método inválido. Esperado um dos: " . implode(", ", $expectedMethods), 405);
+            return $this->jsonResponse([], "Método inválido. Esperado um dos: " . implode(", ", $expectedMethods), 405);
         }
     }
 
