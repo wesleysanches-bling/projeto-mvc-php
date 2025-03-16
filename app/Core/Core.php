@@ -41,10 +41,12 @@ class Core
                 }
             }
 
-            var_dump($url[0]);
             if (isset($url[0])) {
-                $this->method = $url[0];
-                array_shift($url);
+                $method = $url[0];
+                if (method_exists($this->controller, $method)) {
+                    $this->method = $method;
+                    array_shift($url);
+                }
             }
 
             if (isset($url[0])) {
