@@ -62,7 +62,7 @@ class Core
         if (class_exists($this->controller)) {
             return $this->controller;
         }
-        return NAMESPACE_CONTROLLER . ucfirst(DEFAULT_CONTROLLER) . "Controller";
+        return $this->getDefaultController();
     }
 
     private function getMethod()
@@ -87,8 +87,6 @@ class Core
 
     private function getDefaultController()
     {
-        $route = explode('\\', DEFAULT_CONTROLLER);
-        $controllerName = ucfirst(array_pop($route)) . "Controller";
-        return implode('\\', $route) . '\\' . $controllerName;
+        return NAMESPACE_CONTROLLER . ucfirst(DEFAULT_CONTROLLER) . "Controller";
     }
 }
