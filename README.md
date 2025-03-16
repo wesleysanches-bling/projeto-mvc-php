@@ -65,7 +65,7 @@ Defina o método que será chamado para essa rota:
 ```php
 <?php
 
-namespace App\Api;
+namespace App\Controllers\Api;
 
 class UserController
 {
