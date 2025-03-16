@@ -33,16 +33,15 @@ class Core
             $nameSpace = '';
             foreach ($url as $segment) {
                 $nameSpace .= $nameSpace ? '\\' . ucfirst($segment) : ucfirst($segment);
-
                 $controller = $this->checkIfControllerExists($nameSpace);
+                array_shift($url);
                 if($controller) {
                     $this->controller = $controller;
                     break;
                 }
-
-                array_shift($url);
             }
 
+            var_dump($url[0]);
             if (isset($url[0])) {
                 $this->method = $url[0];
                 array_shift($url);
