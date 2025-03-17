@@ -1,5 +1,6 @@
 <?php
 define('DEFAULT_CONTROLLER', 'Principal\\Home');
+define('PAGE_NOT_FOUND_CONTROLLER', 'Principal\\PageNotFound');
 define('DEFAULT_METHOD', 'index');
 define('NAMESPACE_CONTROLLER', 'App\\Controllers\\');
 define('MAINTENANCE_CONTROLLER', 'Principal\\MaintenanceController');

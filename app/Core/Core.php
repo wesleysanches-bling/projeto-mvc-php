@@ -41,6 +41,10 @@ class Core
                 }
             }
 
+            if(!$this->controller) {
+                return $this->controller = $this->getPageNotFoundController();
+            }
+
             if (isset($url[0])) {
                 $method = $url[0];
                 if (method_exists($this->controller, $method)) {
@@ -88,5 +92,10 @@ class Core
     private function getDefaultController()
     {
         return NAMESPACE_CONTROLLER . ucfirst(DEFAULT_CONTROLLER) . "Controller";
+    }
+
+    public function getPageNotFoundController()
+    {
+        return NAMESPACE_CONTROLLER . ucfirst(PAGE_NOT_FOUND_CONTROLLER) . "Controller";
     }
 }
