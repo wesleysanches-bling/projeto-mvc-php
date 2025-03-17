@@ -11,4 +11,11 @@ class Controller
     use Cripto;
     use LoadViewTwig;
     use HttpRequestResponseTrait;
+
+    protected function middleware($middleware)
+    {
+        if (is_callable($middleware)) {
+            $middleware();
+        }
+    }
 }
