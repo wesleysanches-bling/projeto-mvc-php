@@ -21,7 +21,7 @@ class Core
     private function checkUri()
     {
         if (MAINTENANCE) {
-           return $this->controller = MAINTENANCE_CONTROLLER;
+           return $this->controller = NAMESPACE_CONTROLLER . MAINTENANCE_CONTROLLER;
         }
 
         $url = explode("index.php", $_SERVER["PHP_SELF"]);
