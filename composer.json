@@ -1,12 +1,12 @@
 {
-    "name": "wesley.vilaseca/projetodelivery-frenteloja",
-    "description": "modelo mvc como engine twig",
+    "name": "wesley.vilaseca/projeto-mvc-devpool",
+    "description": "modelo mvc em PHP",
     "minimum-stability": "stable",
     "license": "proprietary",
     "authors": [
         {
             "name": "Wesley Vila Seca Sanches",
-            "email": "wesley.vilaseca@hotmail.com",
+            "email": "wesley.sanches@bling.com.br",
             "role": "Developer"
         }
     ],
