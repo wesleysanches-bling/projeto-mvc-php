@@ -8,9 +8,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $dados["title"] = "Home - MeuDelivery";
-        $dados["mensagem"] = "funcional";
-        $view = "principal/pages/home/home";
-        $this->load($view, $dados);
+        $data["title"] = "Projeto MVC";
+        $data["mensagem"] = "funcional";
+        $this->load("principal/pages/home/home", $data);
     }
 }

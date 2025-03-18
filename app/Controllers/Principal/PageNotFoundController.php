@@ -7,9 +7,7 @@ class PageNotFoundController extends Controller
 {
     public function index()
     {
-        $data          = [];
         $data['title'] = 'Page not found';
-        $view           = "principal/pages/not-found/index";
-        $this->load($view, $data);
+        $this->load("principal/pages/not-found/index", $data);
     }
 }

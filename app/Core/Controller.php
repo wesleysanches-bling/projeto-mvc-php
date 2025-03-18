@@ -2,14 +2,14 @@
 
 namespace App\Core;
 
-use App\Supports\Traits\LoadViewTwig;
+use App\Supports\Traits\LoadView;
 use App\Supports\SupportsCripto\Cripto;
 use App\Supports\Traits\HttpRequestResponseTrait;
 
 class Controller
 {
     use Cripto;
-    use LoadViewTwig;
+    use LoadView;
     use HttpRequestResponseTrait;
 
     protected function middleware($middleware)

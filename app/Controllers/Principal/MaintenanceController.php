@@ -7,8 +7,7 @@ class MaintenanceController extends Controller
 {
     public function index()
     {
-        $dados          = [];
-        $view           = "principal/pages/maintenance/index";
-        $this->load($view, $dados);
+        $data['title'] = 'Em manutenção';
+        $this->load("principal/pages/maintenance/index", $data);
     }
 }
