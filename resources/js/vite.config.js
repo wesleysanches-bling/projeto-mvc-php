@@ -15,5 +15,13 @@ export default defineConfig({
       }
     },
     base: './'
-  }
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:88',
+        changeOrigin: true,
+      },
+    },
+  },
 })
