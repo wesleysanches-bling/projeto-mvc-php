@@ -33,6 +33,7 @@ Após o build ser concluído com sucesso, você poderá acessar o projeto atrav�
 ## Estrutura de Diretórios
 Este projeto segue a arquitetura MVC (Model-View-Controller) e organiza os arquivos da aplicação de maneira a separar claramente a lógica da aplicação, as configurações e os recursos estáticos. Abaixo está a estrutura de diretórios do projeto:
 
+```php
 projeto-mvc-php/
 ├── .docker/                # Arquivos de configuração do Docker para facilitar a configuração do ambiente
 ├── .vscode/                # Configurações específicas do Visual Studio Code (opcional)
@@ -40,7 +41,7 @@ projeto-mvc-php/
 │   ├── Controllers/        # Diretório com os controllers que gerenciam a lógica das rotas
 │   ├── Middlewares/        # Diretório com middlewares para interceptação de requisições
 │   ├── Models/             # Contém os modelos que representam as entidades da aplicação
-│   └── Core/               # Contém classes fundamentais do sistema, como Controller.php,
+│   └── Core/               # Contém classes fundamentais do sistema, como Controller.php, Core.php, Model.php
 ├── config/                 # Arquivos de configuração da aplicação
 │   └── config.php          # Arquivo principal de configuração
 ├── public/                 # Diretório público acessível via URL
@@ -53,6 +54,7 @@ projeto-mvc-php/
 ├── .env                    # Arquivo com as variáveis de ambiente utilizadas no projeto
 ├── docker-compose.yml      # Arquivo de configuração do Docker Compose
 └── README.md               # Este arquivo de documentação do projeto
+```
 
 ## Configuração do Projeto
 O arquivo de configuração principal do projeto está localizado em:
