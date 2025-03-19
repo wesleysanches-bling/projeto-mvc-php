@@ -13,8 +13,10 @@ trait LoadView
 
         include_once 'resources/views/' . $view . '.php';
 
-         $content = ob_get_clean();
+        if ($template) {
+            $content = ob_get_clean();
 
-         include_once 'resources/views/' . $template . '/tema/template.php';
+            include_once 'resources/views/' . $template . '/tema/template.php';
+        }
     }
 }
