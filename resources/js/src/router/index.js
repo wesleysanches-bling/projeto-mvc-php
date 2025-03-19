@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/home/HomeView.vue';
 import ContactView from '../views/contact/ContactView.vue';
+import RouteNotFoundView from '../views/route-not-fount/RouteNotFoundView.vue'
+
 
 
 const routes = [
@@ -13,6 +15,11 @@ const routes = [
     path: '/contact',
     name: 'contact',
     component: ContactView
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: 'not-found',
+    component: RouteNotFoundView
   }
 ];
 
