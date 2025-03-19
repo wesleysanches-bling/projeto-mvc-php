@@ -30,6 +30,30 @@ Após o build ser concluído com sucesso, você poderá acessar o projeto atrav�
 
 `http://localhost:88`
 
+## Estrutura de Diretórios
+Este projeto segue a arquitetura MVC (Model-View-Controller) e organiza os arquivos da aplicação de maneira a separar claramente a lógica da aplicação, as configurações e os recursos estáticos. Abaixo está a estrutura de diretórios do projeto:
+
+projeto-mvc-php/
+├── .docker/                # Arquivos de configuração do Docker para facilitar a configuração do ambiente
+├── .vscode/                # Configurações específicas do Visual Studio Code (opcional)
+├── app/                    # Contém os arquivos principais da aplicação
+│   ├── Controllers/        # Diretório com os controllers que gerenciam a lógica das rotas
+│   ├── Middlewares/        # Diretório com middlewares para interceptação de requisições
+│   ├── Models/             # Contém os modelos que representam as entidades da aplicação
+│   └── Core/               # Contém classes fundamentais do sistema, como Controller.php,
+├── config/                 # Arquivos de configuração da aplicação
+│   └── config.php          # Arquivo principal de configuração
+├── public/                 # Diretório público acessível via URL
+│   ├── assets/             # Arquivos estáticos como imagens, fontes, etc.
+│   └── css                 # Arquivos CSS compilados ou personalizados
+├── resources/              # Arquivos de recursos, como JS e views
+│   ├── js/                 # Scripts JavaScript (como a aplicação Vue)
+│   ├── views/              # Views utilizadas para renderizar as páginas HTML
+├── .env.example            # Arquivo de exemplo com variáveis de ambiente (não contém dados sensíveis)
+├── .env                    # Arquivo com as variáveis de ambiente utilizadas no projeto
+├── docker-compose.yml      # Arquivo de configuração do Docker Compose
+└── README.md               # Este arquivo de documentação do projeto
+
 ## Configuração do Projeto
 O arquivo de configuração principal do projeto está localizado em:
 
@@ -41,10 +65,9 @@ Modo de Manutenção: Defina se o projeto está em manutenção ou se pode ser a
 Controller Padrão: Especifique qual controller será usado como padrão para o projeto.
 
 ## Roteamento Automático
-O projeto possui um sistema de roteamento automatizado, onde as rotas são mapeadas diretamente para os controllers e seus métodos.A rota padrão inicial do projeto é o controller responsável por exibir um SPA vuejs, mas se a rota não for do tipo `/api` e o controller apontar para um view em php, a mesma será renderizada sem problemas.
+O projeto implementa um sistema de roteamento automatizado, no qual as rotas são mapeadas diretamente para os controllers e seus respectivos métodos. Ele distingue claramente entre rotas web e rotas de API. Controllers localizados no diretório `app/Controllers/Api são` tratados exclusivamente como rotas de API, enquanto os controllers fora desse diretório serão responsáveis por renderizar as views correspondentes.
 
-## Roteamento Automático
-O projeto implementa um sistema de roteamento automatizado, no qual as rotas são mapeadas diretamente para os controllers e seus respectivos métodos. A principal diferença é que ele distingue rotas web de rotas de API. Assim, qualquer controller localizado no diretório `app/Controllers/Api` será tratado exclusivamente como uma rota de API. Para as demais rotas, que não são de API e possuem um controller correspondente, o sistema realizará a renderização de maneira automática e sem dificuldades desde que esteja corretamente configurado.
+A rota inicial padrão do projeto exibe um SPA Vue.js, mas quando a rota não for do tipo `/api`, o sistema renderiza automaticamente as views em PHP, desde que configuradas corretamente. Esse sistema permite uma navegação flexível e facilita o gerenciamento de rotas, separando claramente as responsabilidades entre rotas de API e as rotas web tradicionais.
 
 ### Exemplos de Rotas
 A rota `http://localhost:88/api/exemplo` acessa o método padrão do `ExemploController` no diretório `App/Controllers/Api/`.
