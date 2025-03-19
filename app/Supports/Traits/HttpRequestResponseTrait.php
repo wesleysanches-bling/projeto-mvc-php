@@ -24,8 +24,10 @@ trait HttpRequestResponseTrait
 
         header('Content-Type: application/json');
 
+        $response = [];
+
         if(!empty($data)) {
-            $reponse['data'] = $data;
+            $response['data'] = $data;
         }
 
         if($message) {
