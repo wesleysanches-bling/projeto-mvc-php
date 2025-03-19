@@ -41,7 +41,10 @@ Modo de Manutenção: Defina se o projeto está em manutenção ou se pode ser a
 Controller Padrão: Especifique qual controller será usado como padrão para o projeto.
 
 ## Roteamento Automático
-O projeto possui um sistema de roteamento automatizado, onde as rotas são mapeadas diretamente para os controllers e seus métodos.
+O projeto possui um sistema de roteamento automatizado, onde as rotas são mapeadas diretamente para os controllers e seus métodos.A rota padrão inicial do projeto é o controller responsável por exibir um SPA vuejs, mas se a rota não for do tipo `/api` e o controller apontar para um view em php, a mesma será renderizada sem problemas.
+
+## Roteamento Automático
+O projeto implementa um sistema de roteamento automatizado, no qual as rotas são mapeadas diretamente para os controllers e seus respectivos métodos. A principal diferença é que ele distingue rotas web de rotas de API. Assim, qualquer controller localizado no diretório `app/Controllers/Api` será tratado exclusivamente como uma rota de API. Para as demais rotas, que não são de API e possuem um controller correspondente, o sistema realizará a renderização de maneira automática e sem dificuldades desde que esteja corretamente configurado.
 
 ### Exemplos de Rotas
 A rota `http://localhost:88/api/exemplo` acessa o método padrão do `ExemploController` no diretório `App/Controllers/Api/`.
