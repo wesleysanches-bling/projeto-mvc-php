@@ -4,7 +4,6 @@ namespace App\Supports\Traits;
 
 use Exception;
 
-ob_start();
 trait HttpRequestResponseTrait
 {
     protected function validateRequestMethods(array $expectedMethods)
@@ -17,15 +16,19 @@ trait HttpRequestResponseTrait
 
     protected function jsonResponse($data = [], $message = "", $httpCode = 200)
     {
+        ob_start();
+
         ob_clean();
 
         http_response_code($httpCode);
 
         header('Content-Type: application/json');
-        
-        $response = [
-            'data' => $data
-        ];
+
+        $response = [];
+
+        if(!empty($data)) {
+            $response['data'] = $data;
+        }
 
         if($message) {
             $response['message'] = $message;
