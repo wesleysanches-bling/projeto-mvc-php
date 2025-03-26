@@ -6,7 +6,7 @@ use App\Supports\Traits\LoadView;
 use App\Supports\SupportsCripto\Cripto;
 use App\Supports\Traits\HttpRequestResponseTrait;
 
-class Controller
+abstract class Controller
 {
     use Cripto;
     use LoadView;
