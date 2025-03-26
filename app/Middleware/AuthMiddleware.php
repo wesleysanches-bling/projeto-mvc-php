@@ -1,8 +1,9 @@
 <?php 
 
 namespace App\Middleware;
+use App\Core\Middleware;
 
-class AuthMiddleware
+class AuthMiddleware extends Middleware
 {
     public function handle()
     {
