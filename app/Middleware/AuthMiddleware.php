@@ -2,7 +2,9 @@
 
 namespace App\Middleware;
 
-class AuthMiddleware
+use App\Core\Middleware;
+
+class AuthMiddleware extends Middleware
 {
     public function handle()
     {
