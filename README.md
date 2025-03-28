@@ -71,6 +71,11 @@ O projeto implementa um sistema de roteamento automatizado, no qual as rotas sã
 
 A rota inicial padrão do projeto exibe um SPA Vue.js, mas quando a rota não for do tipo `/api`, o sistema renderiza automaticamente as views em PHP, desde que configuradas corretamente. Esse sistema permite uma navegação flexível e facilita o gerenciamento de rotas, separando claramente as responsabilidades entre rotas de API e as rotas web tradicionais.
 
+## Front end da Aplicação
+A rota padrão da aplicação direciona para a SPA desenvolvida em Vue.js, localizada no diretório `resources/js`. Para criar novas telas, é necessário iniciar o modo de desenvolvedor utilizando o comando `npm run dev`. Durante esse processo, a URL onde a aplicação está sendo executada será exibida no console.
+
+Após concluir o desenvolvimento da interface, execute o comando `npm run build` para gerar o build de produção. Esse comando cria uma versão otimizada da aplicação, e as alterações realizadas no front-end estarão disponíveis na URL padrão do projeto, tornando a interface acessível para os usuários finais.
+
 ### Exemplos de Rotas
 A rota `http://localhost:88/api/exemplo` acessa o método padrão do `ExemploController` no diretório `App/Controllers/Api/`.
 
@@ -80,10 +85,6 @@ A rota `http://localhost:88/principal/home` acessa o método `home` do `HomeCont
 
 O padrão de roteamento segue a estrutura de namespaces do projeto. O caminho da URL após a raiz do domínio é mapeado diretamente para o namespace do controller e método. O que vier após o nome do controller é interpretado como parâmetros passados pela URL.
 
-### Como Criar uma Nova Rota
-Para adicionar uma nova rota, basta criar um novo controller e definir o método que será chamado para essa rota.
-
-Exemplo:
 #### Criar o Controller
 
 Suponha que você queira adicionar uma nova rota para `UserController` no namespace `App/Controllers/Api/`.
