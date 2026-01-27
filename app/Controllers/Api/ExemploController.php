@@ -3,6 +3,7 @@
 namespace App\Controllers\Api;
 
 use App\Core\Controller;
+use App\Middleware\AuthApiMiddleware;
 use App\Models\Exemplo;
 
 class ExemploController extends Controller
@@ -11,6 +12,7 @@ class ExemploController extends Controller
 
     public function __construct()
     {
+        $this->middleware([new AuthApiMiddleware(), 'handle']);
         $this->repository = new Exemplo();
     }
 
