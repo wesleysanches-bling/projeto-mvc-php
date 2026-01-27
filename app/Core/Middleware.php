@@ -3,7 +3,7 @@
 namespace App\Core;
 use App\Supports\Traits\HttpRequestResponseTrait;
 
-class Middleware
+abstract class Middleware
 {
     use HttpRequestResponseTrait;
 }
