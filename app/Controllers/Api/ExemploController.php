@@ -12,7 +12,7 @@ class ExemploController extends Controller
 
     public function __construct()
     {
-        $this->middleware([new AuthApiMiddleware(), 'handle']);
+        $this->middleware(AuthApiMiddleware::class);
         $this->repository = new Exemplo();
     }
 

@@ -1,10 +1,9 @@
 <?php
-define('DEFAULT_CONTROLLER', 'VueApp');
+define('DEFAULT_CONTROLLER', 'Api\\Welcome');
 define('API_ROUTE', 'api');
-define('PAGE_NOT_FOUND_CONTROLLER', 'Principal\\PageNotFound');
+define('ROUTE_NOT_FOUND_CONTROLLER', 'Api\\RouteNotFound');
 define('DEFAULT_METHOD', 'index');
 define('NAMESPACE_CONTROLLER', 'App\\Controllers\\');
-define('MAINTENANCE_CONTROLLER', 'Principal\\MaintenanceController');
 
 define('HTTP_METHOD_GET', 'GET');
 define('HTTP_METHOD_POST', 'POST');

@@ -2,7 +2,6 @@
 
 namespace App\Core;
 
-use App\Supports\SupportsApirequest\PullApi;
 use App\Supports\SupportsCripto\Cripto;
 use Exception;
 
@@ -10,6 +9,7 @@ abstract class Model
 {
     use Cripto;
     protected $db;
+
     public function __construct()
     {
         $host = $_ENV['DB_HOST'];
@@ -34,12 +34,6 @@ abstract class Model
         } catch (\PDOException $e) {
             throw new Exception("Erro ao conectar ao banco de dados: " . $e->getMessage());
         }
-
-    }
-
-    protected function pullApi($data, string $url)
-    {
-        $apiRequest = new PullApi();
-        return $apiRequest->pullApi($data, $url);
     }
 }
+

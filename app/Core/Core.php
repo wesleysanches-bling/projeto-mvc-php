@@ -20,18 +20,12 @@ class Core
 
     private function checkUri()
     {
-        $isApiRoute = false;
-        if (MAINTENANCE) {
-           return $this->controller = NAMESPACE_CONTROLLER . MAINTENANCE_CONTROLLER;
-        }
-
         $url = explode("index.php", $_SERVER["PHP_SELF"]);
         $url = end($url);
+        
         if (!empty($url)) {
             $url = explode('/', $url);
             array_shift($url);
-
-            $isApiRoute =  $url[0] === API_ROUTE;
 
             $nameSpace = '';
             foreach ($url as $segment) {
@@ -45,7 +39,7 @@ class Core
             }
 
             if(!$this->controller) {
-                return $this->controller = $isApiRoute ? $this->getApiControllerRouteNotFound(): $this->getDefaultController();
+                return $this->controller = $this->getRouteNotFoundController();
             }
 
             if (isset($url[0])) {
@@ -74,7 +68,7 @@ class Core
 
     private function getMethod()
     {
-        if (method_exists(Core::getController(), $this->method)) {
+        if ($this->method && method_exists($this->getController(), $this->method)) {
             return $this->method;
         }
 
@@ -97,8 +91,8 @@ class Core
         return NAMESPACE_CONTROLLER . ucfirst(DEFAULT_CONTROLLER) . "Controller";
     }
 
-    private function getApiControllerRouteNotFound() 
+    private function getRouteNotFoundController()
     {
-        return NAMESPACE_CONTROLLER . "Api\\RouteNotFoundController";
+        return NAMESPACE_CONTROLLER . ROUTE_NOT_FOUND_CONTROLLER . "Controller";
     }
 }

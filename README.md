@@ -1,125 +1,318 @@
-# Projeto MVC PHP com Docker
+# API REST em PHP com padrão MVC
 
-Este projeto utiliza o padrão de arquitetura MVC (Model-View-Controller) em PHP, e é configurado para rodar dentro de um contêiner Docker.
+Este é um projeto de estudos para iniciantes que implementa uma **API REST** utilizando o padrão **MVC (Model-View-Controller)** em PHP puro, configurado para rodar em Docker.
+
+## O que é uma API?
+
+**API (Application Programming Interface)** é uma interface que permite a comunicação entre diferentes sistemas. Uma **API REST** utiliza o protocolo HTTP para receber requisições e retornar dados, geralmente no formato JSON.
+
+Por exemplo, quando você acessa `/api/usuarios`, a API processa a requisição e retorna uma lista de usuários em formato JSON:
+
+```json
+{
+    "status": "success",
+    "data": [
+        { "id": 1, "nome": "João" },
+        { "id": 2, "nome": "Maria" }
+    ]
+}
+```
+
+## O que é o padrão MVC?
+
+**MVC (Model-View-Controller)** é um padrão de arquitetura que separa a aplicação em três camadas:
+
+| Camada | Responsabilidade | Neste projeto |
+|--------|------------------|---------------|
+| **Model** | Representa os dados e a lógica de acesso ao banco de dados | `app/Models/` |
+| **View** | Apresenta os dados ao usuário (em APIs, é a resposta JSON) | Resposta JSON |
+| **Controller** | Recebe as requisições, processa e coordena Model e View | `app/Controllers/` |
+
+### Fluxo de uma requisição
+
+```
+Requisição HTTP → Controller → Model (busca dados) → Controller → Resposta JSON
+```
+
+**Exemplo prático:**
+
+1. Usuário faz requisição `GET /api/exemplo/show/1`
+2. O **Controller** (`ExemploController`) recebe a requisição
+3. O Controller chama o **Model** (`Exemplo`) para buscar o registro com ID 1
+4. O Model consulta o banco de dados e retorna os dados
+5. O Controller formata e retorna a resposta JSON
 
 ## Requisitos
 
-Antes de rodar o projeto, é necessário ter o Docker e o Docker Compose instalados na sua máquina.
+Antes de rodar o projeto, é necessário ter instalado:
 
 - [Docker](https://www.docker.com/get-started)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
-## Instruções de Execução
+## Como Executar
 
 ### 1. Preparando o ambiente
 
-- Faça uma cópia do arquivo `.env.example` e renomeie para `.env`:
+Faça uma cópia do arquivo `.env.example` e renomeie para `.env`:
 
-  `cp .env.example .env`
-
-### 2. Iniciar o Projeto
-Abra o terminal e execute o comando a seguir para iniciar o contêiner Docker e o build do projeto:
-
-
-`docker-compose up`
-
-Acompanhe o processo de build até que tudo seja finalizado. O Docker irá configurar os containers necessários e instalar as dependências do projeto.
-
-### 3. Acessando o Projeto
-Após o build ser concluído com sucesso, você poderá acessar o projeto através da seguinte URL:
-
-`http://localhost:88`
-
-## Estrutura de Diretórios
-Este projeto segue a arquitetura MVC (Model-View-Controller) e organiza os arquivos da aplicação de maneira a separar claramente a lógica da aplicação, as configurações e os recursos estáticos. Abaixo está a estrutura de diretórios do projeto:
-
-```php
-projeto-mvc-php/
-├── .docker/                # Arquivos de configuração do Docker para facilitar a configuração do ambiente
-├── .vscode/                # Configurações específicas do Visual Studio Code (opcional)
-├── app/                    # Contém os arquivos principais da aplicação
-│   ├── Controllers/        # Diretório com os controllers que gerenciam a lógica das rotas
-│   ├── Middlewares/        # Diretório com middlewares para interceptação de requisições
-│   ├── Models/             # Contém os modelos que representam as entidades da aplicação
-│   └── Core/               # Contém classes fundamentais do sistema, como Controller.php, Core.php, Model.php
-├── config/                 # Arquivos de configuração da aplicação
-│   └── config.php          # Arquivo principal de configuração
-├── public/                 # Diretório público acessível via URL
-│   ├── assets/             # Arquivos estáticos como imagens, fontes, etc.
-│   └── css                 # Arquivos CSS compilados ou personalizados
-├── resources/              # Arquivos de recursos, como JS e views
-│   ├── js/                 # Scripts JavaScript (como a aplicação Vue)
-│   ├── views/              # Views utilizadas para renderizar as páginas HTML
-├── .env.example            # Arquivo de exemplo com variáveis de ambiente (não contém dados sensíveis)
-├── .env                    # Arquivo com as variáveis de ambiente utilizadas no projeto
-├── docker-compose.yml      # Arquivo de configuração do Docker Compose
-└── README.md               # Este arquivo de documentação do projeto
+```bash
+cp .env.example .env
 ```
 
-## Configuração do Projeto
-O arquivo de configuração principal do projeto está localizado em:
+### 2. Iniciar o Projeto
 
-`projeto-mvc-php/config/config.php`
+Execute o comando para iniciar os containers:
 
-Neste arquivo, você pode definir algumas configurações importantes, como:
+```bash
+docker-compose up
+```
 
-Modo de Manutenção: Defina se o projeto está em manutenção ou se pode ser acessado.
-Controller Padrão: Especifique qual controller será usado como padrão para o projeto.
+### 3. Acessando a API
 
-## Roteamento Automático
-O projeto implementa um sistema de roteamento automatizado, no qual as rotas são mapeadas diretamente para os controllers e seus respectivos métodos. Ele distingue claramente entre rotas web e rotas de API. Controllers localizados no diretório `app/Controllers/Api são` tratados exclusivamente como rotas de API, enquanto os controllers fora desse diretório serão responsáveis por renderizar as views correspondentes.
+Após o build ser concluído, a API estará disponível em:
 
-A rota inicial padrão do projeto exibe um SPA Vue.js, mas quando a rota não for do tipo `/api`, o sistema renderiza automaticamente as views em PHP, desde que configuradas corretamente. Esse sistema permite uma navegação flexível e facilita o gerenciamento de rotas, separando claramente as responsabilidades entre rotas de API e as rotas web tradicionais.
+```
+http://localhost:88
+```
 
-## Front end da Aplicação
-A rota padrão da aplicação direciona para a SPA desenvolvida em Vue.js, localizada no diretório `resources/js`. Para criar novas telas, é necessário iniciar o modo de desenvolvedor utilizando o comando `npm run dev`. Durante esse processo, a URL onde a aplicação está sendo executada será exibida no console.
+## Estrutura de Diretórios
 
-Após concluir o desenvolvimento da interface, execute o comando `npm run build` para gerar o build de produção. Esse comando cria uma versão otimizada da aplicação, e as alterações realizadas no front-end estarão disponíveis na URL padrão do projeto, tornando a interface acessível para os usuários finais.
+```
+projeto-mvc-php/
+├── .docker/                # Configurações do Docker
+├── app/                    # Código principal da aplicação
+│   ├── Controllers/        # Controllers da API
+│   │   └── Api/            # Controllers de endpoints
+│   ├── Core/               # Classes base (Controller, Core, Model)
+│   ├── Middleware/         # Middlewares de autenticação
+│   ├── Models/             # Models (entidades do banco)
+│   └── Supports/           # Classes de suporte (Criptografia, Logs, etc)
+├── config/                 # Configurações da aplicação
+│   └── config.php          # Arquivo principal de configuração
+├── docker-compose.yml      # Configuração do Docker Compose
+├── index.php               # Ponto de entrada da aplicação
+└── README.md               # Este arquivo
+```
 
-### Exemplos de Rotas
-A rota `http://localhost:88/api/exemplo` acessa o método padrão do `ExemploController` no diretório `App/Controllers/Api/`.
+## Como Funciona o Roteamento
 
-A rota `http://localhost:88/api/exemplo/show/1` acessa o método `show` do `ExemploController` no diretório `App/Controllers/Api/`, passando `1` como `parâmetro`.
+O projeto implementa um sistema de roteamento automático baseado em namespaces. A URL é mapeada diretamente para os controllers e métodos.
 
-A rota `http://localhost:88/principal/home` acessa o método `home` do `HomeController` no diretório `App/Controllers/Principal/`.
+### Estrutura das Rotas
 
-O padrão de roteamento segue a estrutura de namespaces do projeto. O caminho da URL após a raiz do domínio é mapeado diretamente para o namespace do controller e método. O que vier após o nome do controller é interpretado como parâmetros passados pela URL.
+```
+http://localhost:88/api/{controller}/{método}/{parâmetros}
+```
 
-#### Criar o Controller
+### Exemplos
 
-Suponha que você queira adicionar uma nova rota para `UserController` no namespace `App/Controllers/Api/`.
+| URL | Controller | Método | Descrição |
+|-----|------------|--------|-----------|
+| `/api/exemplo` | ExemploController | index() | Lista todos |
+| `/api/exemplo/show/1` | ExemploController | show(1) | Busca por ID |
+| `/api/exemplo/store` | ExemploController | store() | Cria novo (POST) |
+| `/api/exemplo/update/1` | ExemploController | update(1) | Atualiza (PUT) |
+| `/api/exemplo/delete/1` | ExemploController | delete(1) | Remove (DELETE) |
 
-Crie o arquivo `UserController.php` em `App/Controllers/Api/`.
-Defina o método que será chamado para essa rota:
+## Criando um Novo Controller
+
+Para criar um novo endpoint, basta criar um controller na pasta `app/Controllers/Api/`.
+
+Exemplo: Criar um `UserController`:
+
 ```php
 <?php
 
 namespace App\Controllers\Api;
 
-class UserController
+use App\Core\Controller;
+
+class UserController extends Controller
 {
     public function index()
     {
-        // Lógica para o método index
-        echo "Método index do UserController";
+        return $this->jsonResponse(['message' => 'Lista de usuários']);
     }
 
-    public function show($id)
+    public function show(int $id)
     {
-        // Lógica para o método show
-        echo "Mostrando usuário com ID: " . $id;
+        return $this->jsonResponse(['message' => 'Usuário ' . $id]);
+    }
+
+    public function store()
+    {
+        $this->validateRequestMethods(['POST']);
+        $data = $this->getRequestData();
+        
+        return $this->jsonResponse(['message' => 'Usuário criado', 'data' => $data]);
     }
 }
 ```
 
-### Definir a Rota
+Após criar o controller, as rotas já estarão disponíveis automaticamente:
 
-O sistema de rotas já reconhece automaticamente as URLs e associa os caminhos aos controllers e métodos. Para acessar o método index de `UserController`, você usaria a URL:
+- `GET /api/user` → `UserController::index()`
+- `GET /api/user/show/1` → `UserController::show(1)`
+- `POST /api/user/store` → `UserController::store()`
 
-`http://localhost:88/api/user`
-Para acessar o método show, você usaria:
+## Usando Middlewares
 
-`http://localhost:88/api/user/show/1`
-Isso automaticamente mapeará a URL para o método correto no controller, passando o 1 como parâmetro.
+**Middlewares** são filtros que executam **antes** da ação do controller. São úteis para:
+
+- Verificar se o usuário está autenticado
+- Validar permissões de acesso
+- Registrar logs de requisições
+
+### Como usar um Middleware
+
+No construtor do controller, chame o método `middleware()` passando a classe:
+
+```php
+<?php
+
+namespace App\Controllers\Api;
+
+use App\Core\Controller;
+use App\Middleware\AuthApiMiddleware;
+
+class MeuController extends Controller
+{
+    public function __construct()
+    {
+        // Executa o middleware antes de qualquer ação
+        $this->middleware(AuthApiMiddleware::class);
+    }
+
+    public function index()
+    {
+        // Só chega aqui se o middleware permitir
+        return $this->jsonResponse(['message' => 'Usuário autenticado!']);
+    }
+}
+```
+
+### Como criar um Middleware
+
+Crie uma classe em `app/Middleware/` que estenda `Middleware`:
+
+```php
+<?php
+
+namespace App\Middleware;
+
+use App\Core\Middleware;
+
+class MeuMiddleware extends Middleware
+{
+    public function handle()
+    {
+        // Sua lógica de validação aqui
+        if (!$this->usuarioTemPermissao()) {
+            return $this->jsonResponse([], 'Acesso negado', 403);
+        }
+        
+        // Se não retornar nada, a requisição continua normalmente
+    }
+
+    private function usuarioTemPermissao()
+    {
+        // Implemente sua lógica
+        return true;
+    }
+}
+```
+
+### Fluxo com Middleware
+
+```
+Requisição HTTP → Middleware (valida) → Controller → Resposta JSON
+                      ↓
+              Se falhar, retorna erro
+```
+
+## Autenticação
+
+O projeto inclui um sistema de autenticação por **sessão** para proteger rotas. O `ExemploController` utiliza o middleware `AuthApiMiddleware` que verifica se o usuário está autenticado.
+
+### Credenciais padrão
+
+| Campo | Valor |
+|-------|-------|
+| Usuário | `devpool` |
+| Senha | `asdf000` |
+
+### Como fazer login
+
+Faça uma requisição POST para `/api/auth/login`:
+
+```bash
+curl --location 'http://localhost:88/api/auth/login' \
+--header 'Content-Type: application/json' \
+--data '{
+    "username": "devpool",
+    "password": "asdf000"
+}'
+```
+
+**Resposta de sucesso:**
+
+```json
+{
+    "data": {
+        "email": "devpool@mail.com",
+        "name": "DevPool",
+        "token": "1234567890"
+    },
+    "message": "Autenticação efetuada com sucesso"
+}
+```
+
+### Como fazer logout
+
+```bash
+curl --location --request POST 'http://localhost:88/api/auth/logout'
+```
+
+### Testando rotas protegidas
+
+Após fazer login, a sessão fica ativa e você pode acessar as rotas protegidas:
+
+```bash
+# Listar todos os registros (rota protegida)
+curl --location 'http://localhost:88/api/exemplo'
+```
+
+**Importante:** Se estiver usando ferramentas como Postman ou Insomnia, certifique-se de que os cookies estão sendo enviados nas requisições para manter a sessão ativa.
+
+## Métodos Úteis do Controller Base
+
+| Método | Descrição |
+|--------|-----------|
+| `$this->jsonResponse($data, $message, $status)` | Retorna resposta JSON |
+| `$this->getRequestData()` | Obtém dados do body da requisição |
+| `$this->validateRequestMethods(['GET', 'POST'])` | Valida método HTTP permitido |
+| `$this->middleware(MeuMiddleware::class)` | Executa um middleware antes da ação |
+
+## Configuração
+
+O arquivo `config/config.php` contém as configurações principais:
+
+```php
+define('DEFAULT_CONTROLLER', 'Api\\Exemplo');  // Controller padrão
+define('URL_BASE', 'http://localhost:88');     // URL base da API
+define('MAINTENANCE', 0);                       // Modo manutenção (0 = desligado)
+```
+
+## Dicas para Iniciantes
+
+1. **Comece pelo ExemploController**: Analise o arquivo `app/Controllers/Api/ExemploController.php` para entender como funciona um CRUD completo.
+
+2. **Entenda o Model**: Veja `app/Models/Exemplo.php` para entender como interagir com o banco de dados.
+
+3. **Use o Postman ou Insomnia**: Ferramentas como Postman facilitam testar os endpoints da API.
+
+4. **Leia os arquivos Core**: Os arquivos em `app/Core/` são a base do framework e ajudam a entender como tudo funciona.
+
+---
 
 Qualquer dúvida, estou à disposição! :)
